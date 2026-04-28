@@ -20,11 +20,17 @@ public:
 	virtual ~Character() {}
 
 	virtual void attackTarget(Character& target) { // call this when attacking
+		
 		random_device rd;
 		mt19937 gen(rd());
 		uniform_int_distribution<int> dist(-5, 10);
 		int random = dist(gen); // a more maluable way to choose a random number
-
+		
+		if (rand() % 5 == 0)//has a 20% chance of missing the attack
+		{
+			cout << "Attack has missed!" << endl; 
+			return;
+		}	
 		int damage = (attack + strengthBonus) - target.defense + random;
 		if (damage < 1)
 			damage = 1;
